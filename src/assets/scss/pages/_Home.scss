@@ -1,0 +1,36 @@
+.swiper {
+  position: relative;
+  .arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 1%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.feature {
+  .row {
+    padding: 44px 0 926px  0;
+    background-color: #F5F5F5;
+    
+    h3 {
+      font-size: 40px;
+      font-weight: 400;
+      background: linear-gradient(#F21299,#1B02B5);
+      color: #fff;
+      padding: 12px;
+      padding-left: 30px;
+    
+    }
+  }
+
+}
