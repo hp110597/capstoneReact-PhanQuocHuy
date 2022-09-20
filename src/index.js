@@ -10,6 +10,7 @@ import { store } from "./redux/configStore";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./assets/scss/styles.scss";
 import Home from './pages/Home/Home';
+import Detail from './pages/Detail/Detail';
 
 
 
@@ -24,9 +25,9 @@ root.render(
     <Routes>
       <Route path="" element={<App />}>
         <Route index element={<Home />}></Route>
-        {/* <Route path="detail">
+        <Route path="detail" >
           <Route path=":id" element={<Detail />}></Route>
-        </Route> */}
+        </Route>
        
       </Route>
     </Routes>

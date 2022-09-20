@@ -1,0 +1,104 @@
+.detail-page {
+  .detail-top {
+    .col-left {
+      background-color: #f8f8f8;
+      .detail-img {
+        padding: 100px 50px;
+      }
+    }
+    .col-right {
+      padding-left: 160px;
+      h1 {
+        font-size: 30px;
+        font-weight: 300;
+      }
+      .description {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h3 {
+        color: #1ed90e;
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+      .size {
+        font-size: 24px;
+        font-weight: 600;
+        padding: 10px;
+        margin-right: 21px;
+        border: none;
+      }
+      .modify {
+        padding: 10px 15px;
+        background: linear-gradient(180deg, #6181f3 0%, #7c97f5 99.48%);
+        color: #fff;
+        border: none;
+      }
+      .addToCart {
+        color: #fff;
+        background: linear-gradient(
+          270deg,
+          rgba(62, 32, 248, 0.9) 5.14%,
+          #d017ee 89.71%
+        );
+        border: none;
+        padding:  9px  24px;
+      }
+    }
+  }
+  .detail-bottom{
+    background-color:#F5F5F5 ;
+    padding-top: 50px;
+    .content{
+        background-color: #F5F5F5;
+        display: flex;
+        justify-content: center;
+        gap: 150px;
+        flex-wrap: wrap;
+     
+       .item{
+        // margin: 0 50px;
+        width:390px ;
+        .card{
+            background-color: #F8F8F8;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            .card-top{
+              // text-align: left;
+              padding:15px 15px 0px;
+              p{
+                text-align: left;
+                padding-left: 30px;
+              }
+              .description{
+                font-size: 20px;
+                font-weight: 300;
+              }
+            }
+          
+            .card-body{
+              margin: 0;
+              padding: 0;
+              text-align: center;
+              a{
+                background-color: #E1B067;
+                font-size: 24px;
+                font-weight: 400;
+                text-decoration: none;
+                color: #000;
+                padding: 17px  ;
+              }
+              p{
+                // padding: 17px;
+                background-color: #DEDDDC;
+                font-size: 24px;
+                font-weight: 600;
+                margin: 0;
+                padding: 17px;
+              }
+            }
+          }
+       }
+      }
+  }
+}

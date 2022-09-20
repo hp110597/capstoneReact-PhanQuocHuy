@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { getProductApi } from "../../redux/reducers/productReducer";
 
 export default function Home() {
 
-    const {arrProduct} = useSelector((state)=>state.productReducer)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const {arrProduct} = useSelector((state)=>state.productReducer);
+    const dispatch = useDispatch();
+    // const navigate = useNavigate();
 
+  //call api 
+  const getAllProductApi =()=>{
+    const actionThunk = getProductApi('ab')
+    dispatch(actionThunk)
+  }
 
+  useEffect(()=>{
+    getAllProductApi()
+  },[])
     
-     
 
-    
+  const renderProduct =() =>{
+    return arrProduct.map((item,index)=>{
+      return  <div className="col-4 my-5 px-5" key={index}>
+      <div className="card">
+        <div className="card-top">
+        <img src={item.image}  alt={item.name} />
+        <p style={{fontSize:24,fontWeight:'300'}}>{item.name}</p>
+        <p  style={{fontSize:20,fontWeight:'300',height:100}}>{item.shortDescription}</p>
+        </div>
+        <div className="card-body row text-white">
+        
+          <NavLink className="col-6" to={`/detail/${item.id}`}>
+            Buy now
+          </NavLink>
+          <p className="col-6 text-dark">{item.price}$</p>
+        </div>
+      </div>
+    </div>
+    })
+  }
 
   return (
-    <div>
-      <div className="swiper">
+    <div className="home-page">
+      <div className="swiper mb-5">
         <div className="swiper-wrapper">
           <div className="swiper-slide">
             <section className="d-flex justify-content-between align-items-center" style={{padding:'0 100px'}}>
@@ -43,20 +70,15 @@ export default function Home() {
           <img src="./img/Polygon 1.png" alt />
         </div>
       </div>
-      <div className="feature ">
-       <div className="row">
+      <div className="feature pt-5">
+       <div className="row row1">
        <h3 className="text-start col-6">Product Feature</h3>
        </div>
-       <div className="row">
-        {/* {renderProduct()} */}
-        <div className="col-4 mt-2">
-            <div className="card">
-                <img src="./" alt="" />
-            </div>
-
+       <div className="row row2">
+        {renderProduct()}
         </div>
        </div>
       </div>
-    </div>
-  );
+    
+  )
 }

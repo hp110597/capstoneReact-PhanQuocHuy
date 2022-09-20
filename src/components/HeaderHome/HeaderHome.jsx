@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default function HeaderHome() {
   return (
@@ -14,17 +15,17 @@ export default function HeaderHome() {
 
         <img src="./img/image 8.png" className='ms-3' alt="..." />
         <span className="text-white">(1)</span>
-        <a href="#" className=" ms-2 text-light" style={{fontSize:16,fontWeight:'300',textDecoration:'none'}}>Login</a>
-        <a href="#" className=" ms-3 me-4 text-light" style={{fontSize:16,fontWeight:'300',textDecoration:'none'}}>Register</a>
+        <NavLink to="#" className=" ms-2 text-light" style={{fontSize:16,fontWeight:'300',textDecoration:'none'}}>Login</NavLink>
+        <NavLink to="#" className=" ms-3 me-4 text-light" style={{fontSize:16,fontWeight:'300',textDecoration:'none'}}>Register</NavLink>
       </div>
     </div>
   </header>
   <section className="navbar d-flex justify-content-start ">
-    <a href="#" className="ms-4 me-3 text-dark" style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Home</a>
-    <a href="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Men</a>
-    <a href="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Woman</a>
-    <a href="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Kid</a>
-    <a href="#" className='text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Sport</a>
+    <NavLink to="#" className="ms-4 me-3 text-dark" style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Home</NavLink>
+    <NavLink to="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Men</NavLink>
+    <NavLink to="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Woman</NavLink>
+    <NavLink to="#" className='me-3 text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Kid</NavLink>
+    <NavLink to="#" className='text-dark' style={{fontSize:20,fontWeight:'400',textDecoration:'none'}}>Sport</NavLink>
   </section>
 
 
