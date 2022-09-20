@@ -48,7 +48,7 @@ export default function Detail() {
               <div className="card-top">
               <img src={item.image}  alt={item.name} style={{width:220,height:200}} />
               <p style={{fontSize:24,fontWeight:'300'}}>{item.name}</p>
-              <p className='description' style={{height:250}}>{item.description.length>100?item.description.substring(0,100)+'...':item.description}</p>
+              <p className='description' style={{height:150}}>{item.description.length>100?item.description.substring(0,100)+'...':item.description}</p>
               </div>
               <div className="card-body row text-white">
               
