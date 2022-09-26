@@ -61,7 +61,7 @@
     }
   }
   .accessFacebook {
-    padding: 15px 0px;
+    padding: 0px 0px;
     width: 100%;
     border: none;
     background-color: #1877f2;
@@ -70,12 +70,19 @@
     i {
       color: #fff;
       font-size: 30px;
+      padding-top: 13px;
     }
-    span {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 400;
-      margin-left: 20px;
+    // span {
+    //   color: #fff;
+    //   font-size: 20px;
+    //   font-weight: 400;
+    //   margin-left: 20px;
+    // }
+    .kep-login-facebook{
+     font-size: 16px;
+     font-weight: 400;
+     background-color: #1877f2;
+     border: none;
     }
   }
 }

@@ -4,9 +4,17 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { loginApi } from "../../redux/reducers/userReducer";
+import FacebookLogin from "react-facebook-login";
+
 
 export default function Login() {
   const dispatch = useDispatch();
+
+
+  const responseFacebook=(response)=>{
+    console.log(response);
+  }
+
 
   const frm = useFormik({
     initialValues: {
@@ -92,8 +100,13 @@ export default function Login() {
         </div>
         <button className="accessFacebook">
         <i class="fa fa-facebook"></i>
-        <span> Continue with Facebook </span>
-
+        {/* <span> Continue with Facebook </span> */}
+        <FacebookLogin 
+        appId="762219268192850"
+        autoLoad={true}
+        fields="name,email,picture"
+        callback={responseFacebook}
+      />
         </button>
       </form>
     </div>
