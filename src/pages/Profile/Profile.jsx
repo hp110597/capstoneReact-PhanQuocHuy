@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileApi } from "../../redux/reducers/userReducer";
+import FacebookLogin from "react-facebook-login";
 
 export default function Profile() {
 //   const { userLogin } = useSelector((state) => state.userReducer);
@@ -9,5 +10,17 @@ export default function Profile() {
 //     //Khi trang vừa load lên thì gọi api => (dispatch lại getProfile api đã xâu dựng)
 //     dispatch(getProfileApi());
 //   }, []);
-  return <div>Profile</div>;
+
+
+const responseFacebook=()=>{
+  return <div></div>
+}
+  return <div>
+     <FacebookLogin
+        appId="762219268192850"
+        autoLoad={true}
+        fields="name,email,picture"
+        callback={responseFacebook}
+      />
+  </div>;
 }
