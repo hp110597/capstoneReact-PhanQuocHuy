@@ -42,7 +42,7 @@ export default function HeaderHome() {
             <i className="fa fa-search text-light fs-4"></i>
             <span className="text-light fs-4 ms-2">Search</span>
 
-            <img src="./img/image 8.png" className="ms-3" alt="..." />
+            <NavLink to='/carts'><img src="./img/image 8.png" className="ms-3" alt="..." /></NavLink>
             <span className="text-white">(1)</span>
             {renderLoginNavItem()}
             {/* <NavLink to="/login" className=" ms-2 text-light" style={{fontSize:16,fontWeight:'300',textDecoration:'none'}}>Login</NavLink> */}

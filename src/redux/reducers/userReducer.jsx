@@ -19,13 +19,13 @@ const userReducer = createSlice({
   name: "userReducer",
   initialState,
   reducers: {
-    getProfileAction:(state,action)=>{
-      state.userLogin = action.payload
-    }
+    getProfileAction: (state, action) => {
+      state.userLogin = action.payload;
+    },
   },
 });
 
-export const {getProfileAction} = userReducer.actions;
+export const { getProfileAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -37,7 +37,7 @@ export const signupApi = (values) => {
         method: "POST",
         data: values,
       });
-      alert(result.data.message );
+      alert(result.data.message);
       // dispatch(result.data.content)
     } catch (err) {
       console.log(err);
@@ -58,8 +58,7 @@ export const loginApi = (values) => {
       setStore(ACCESS_TOKEN, result.data.content.accessToken);
       alert(result.data.message);
       history.push("/profile");
-      dispatch(getProfileApi())
-
+      dispatch(getProfileApi());
     } catch (err) {
       console.log(err);
       alert(err.response?.data.message);
@@ -67,28 +66,49 @@ export const loginApi = (values) => {
   };
 };
 
+export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
+  return async (dispatch) => {
+    try {
+      const result = await axios({
+        url: "https://shop.cyberlearn.vn/api/Users/getProfile",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      });
 
-export const getProfileApi = (accessToken=getStore(ACCESS_TOKEN)) =>{
-  return async (dispatch) =>{
-      try {
-          const result = await axios({
-            url:'https://shop.cyberlearn.vn/api/Users/getProfile',
-            method:'POST',
-            headers:{
-              Authorization:'Bearer ' +accessToken
-            }
-          })
+      //Lấy được thông tin profile đưa lên redux
+      const action = getProfileAction(result.data.content);
+      dispatch(action);
 
-            //Lấy được thông tin profile đưa lên redux
-            const action = getProfileAction(result.data.content)
-            dispatch(action)
+      //Lưu vào storage để reload userlogin có thể lấy default từ store để không cần đăng nhập
+      setStoreJson(USER_LOGIN, result.data.content);
+    } catch (err) {
+      console.log(err);
+      alert("Token không hợp lệ, vui lòng đăng nhập lại");
+      history.push("/login");
+    }
+  };
+};
 
-            //Lưu vào storage để reload userlogin có thể lấy default từ store để không cần đăng nhập
-            setStoreJson(USER_LOGIN,result.data.content)
-      }catch (err){
-        console.log(err);
+export const updateProfileApi = (values) => {
+  return async (dispatch) => {
+    try {
+      const result = await axios({
+        url: "https://shop.cyberlearn.vn/api/Users/updateProfile",
+        method: "POST",
+        data: values,
+        headers: {
+          Authorization: "Bearer " + getStore(ACCESS_TOKEN),
+        },
+      });
+      alert(result.data.content);
+      console.log(result);
 
-      }
-  }
+    } catch (err) {
+      console.log(err);
+      alert(err.response?.data.message);
 
-}
+    }
+  };
+};

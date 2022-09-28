@@ -1,6 +1,10 @@
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileApi } from "../../redux/reducers/userReducer";
+import { getProfileApi, updateProfileApi } from "../../redux/reducers/userReducer";
+import { boolean } from "yup/lib/locale";
 
 export default function Profile() {
   const { userLogin } = useSelector((state) => state.userReducer);
@@ -10,6 +14,27 @@ export default function Profile() {
     dispatch(getProfileApi());
   }, []);
 
+  const frm = useFormik({
+    initialValues: {
+    ...userLogin,
+    name:'',
+    phone:'',
+    },
+    // enableReinitialize:true,
+   
+    //check validation
+    validationSchema: Yup.object().shape({    
+      name:Yup.string().matches("[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$",'Tên không đúng định dạng'),
+      phone:Yup.string().matches("^[0-9][0-9]*$","Số điện thoại không đúng")
+    }),
+    onSubmit: (values,{resetForm}) => {
+      console.log(values);
+      dispatch(updateProfileApi(values));
+      // resetForm({values:''})
+    },
+
+  });
+
   return (
     <>
       <div className="profile-page ">
@@ -18,7 +43,7 @@ export default function Profile() {
             <h3 className="text-start ps-5">Profile</h3>
           </div>
         </div>
-        <div className="row row2">
+        <form className="row row2" onSubmit={frm.handleSubmit}>
           <div className="col-2">
             <div className="avatar">
               <img
@@ -28,35 +53,36 @@ export default function Profile() {
               />
             </div>
           </div>
-          <div className="col-5">
+        
+           <div className="col-5">
             <div className="form-group">
               <p>Email</p>
               <input
                 className="from-control"
                 type="email"
-                placeholder="email"
+                placeholder={userLogin?.email}
                 name="email"
-                // onChange={frm.handleChange}
-                // onBlur={frm.handleBlur}
+                disabled
+                style={{cursor:'no-drop'}}
+                value={userLogin?.email}
+                onChange={frm.handleChange}
+                onBlur={frm.handleBlur}
+                // onSubmit={frm.handleSubmit}
               />
-              {/* {frm.errors.email ? (
-              <p className="text-danger mb-3">{frm.errors.email}</p>
-            ) : (
-              ""
-            )} */}
+             
             </div>
             <div className="form-group">
               <p>Phone</p>
               <input
                 className="from-control"
-                type="text"
+                type="phone"
                 inputMode="numeric"
-                placeholder="phone"
-                name="phone"
-                // onChange={frm.handleChange}
-                // onBlur={frm.handleBlur}
+                placeholder={userLogin?.phone}
+                name="phone"              
+                onChange={frm.handleChange}
+                onBlur={frm.handleBlur}
               />
-              {/* {frm.errors.phone?<p className="text-danger">{frm.errors.phone}</p>:''} */}
+              {frm.errors.phone?<p className="text-danger">{frm.errors.phone}</p>:''}
             </div>
           </div>
           <div className="col-5">
@@ -65,50 +91,26 @@ export default function Profile() {
               <input
                 className="from-control"
                 type="text"
-                placeholder="name"
+                placeholder={userLogin?.name}
                 name="name"
-                // onChange={frm.handleChange}
-                // onBlur={frm.handleBlur}
+                onChange={frm.handleChange}
+                onBlur={frm.handleBlur}
               />
-              {/* {frm.errors.name?<p className="text-danger">{frm.errors.name}</p>:''} */}
+              {frm.errors.name?<p className="text-danger">{frm.errors.name}</p>:''}
             </div>
             <div className="form-group ">
               <p>Password</p>
               <input
                 className="from-control"
+                style={{cursor:'no-drop'}}
                 id="password"
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 name="password"
-                // onChange={frm.handleChange}
-                // onBlur={frm.handleBlur}
-                // value={values.password}
+                disabled
+                value={userLogin?.password}
               />
-
-              {/* <i
-                class="fa fa-eye"
-                id="togglePassword"
-                onClick={() => {
-                  const type =
-                    document.querySelector("#password").getAttribute("type") ===
-                    "password"
-                      ? "text"
-                      : "password";
-                  document
-                    .querySelector("#password")
-                    .setAttribute("type", type);
-                  // toggle the eye / eye slash icon
-                  document
-                    .querySelector("#togglePassword")
-                    .classList.toggle("fa fa-eye-slash");
-                }}
-              ></i> */}
             </div>
-            {/* {frm.errors.password ? (
-                <p className="text-danger mb-3">{frm.errors.password}</p>
-              ) : (
-                ""
-              )} */}
             <div class="form-group gender mt-5 d-flex ">
               <span>Gender</span>
               <label className="description" for="male">
@@ -128,10 +130,11 @@ export default function Profile() {
                 <span class="checkmark"></span>
                 <p>Female</p>
               </label>
-              <button className="ms-auto">Update</button>
+              <button className="mx-auto">Update</button>
             </div>
           </div>
-        </div>
+       
+        </form>
       </div>
       <div className="order-history">
         <div className="row">
@@ -146,7 +149,7 @@ export default function Profile() {
           {userLogin?.ordersHistory?.map((orderItem) => {
             return (
               <div className="mt-5" style={{margin:"0 150px"}} >
-                <p className="text-start">+ Orders have been placed on 09 - 19 - 2020</p>
+                <p className="text-start">+ Orders have been placed on {orderItem.date}</p>
                 <table className="table text-start">
                   <thead style={{backgroundColor:"#D9D9D9"}}>
                     <tr>
@@ -161,10 +164,9 @@ export default function Profile() {
 
                   <tbody>
                     {orderItem.orderDetail?.map((item, index) => {
-                      console.log(index);
                       return (
                         <tr key={index}>
-                          <td style={{width:'15%'}} >{index}</td>
+                          <td style={{width:'15%'}} >{orderItem.id}</td>
                           <td>
                             <img
                               src={item.image}
@@ -177,7 +179,7 @@ export default function Profile() {
                           <td style={{width:'30%'}}>{item.name}</td>
                           <td style={{width:'15%'}}>{item.price}</td>
                           <td style={{width:'15%'}}>{item.quantity}</td>
-                          <td style={{width:'15%'}}>{item.price*item.quantity}</td>
+                          <td style={{width:'15%'}}>{(item.price*item.quantity).toLocaleString()}</td>
                         </tr>
                       );
                     })}
@@ -188,6 +190,7 @@ export default function Profile() {
           })}
         </div>
       </div>
+    
     </>
   );
 }
