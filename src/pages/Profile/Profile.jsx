@@ -19,6 +19,7 @@ export default function Profile() {
     ...userLogin,
     name:'',
     phone:'',
+    radio:boolean
     },
     // enableReinitialize:true,
    
@@ -77,7 +78,7 @@ export default function Profile() {
                 className="from-control"
                 type="phone"
                 inputMode="numeric"
-                placeholder={userLogin?.phone}
+                placeholder='Điền SĐT muốn cập nhật'
                 name="phone"              
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}
@@ -91,7 +92,7 @@ export default function Profile() {
               <input
                 className="from-control"
                 type="text"
-                placeholder={userLogin?.name}
+                placeholder='Điền tên muốn cập nhật'
                 name="name"
                 onChange={frm.handleChange}
                 onBlur={frm.handleBlur}

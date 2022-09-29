@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
@@ -6,8 +7,14 @@ import { getProductDetailApi } from '../../redux/reducers/productReducer'
 
 export default function Detail() {
   const {productDetail} = useSelector(state=>state.productReducer)
+  const {userLogin} = useSelector(state=>state.userReducer)
   const dispatch = useDispatch()
   const params = useParams()
+
+  const [quantity,setQuantity] = useState(1)
+  console.log(productDetail);
+ 
+
 
   useEffect(()=>{
     let {id} = params
@@ -15,6 +22,16 @@ export default function Detail() {
     dispatch(actionThunk)
   },[params.id])
 
+
+  const addToCart=()=>{
+      const action ={
+        type:'productReducer/addProductToCartAction',
+        payload:{...productDetail,quantity}
+      }
+      console.log(action);
+      dispatch(action)
+  }
+  
 
   return (
     <div className='detail-page'>
@@ -34,9 +51,17 @@ export default function Detail() {
           <button className='size'>41</button>
           <button className='size'>42</button>
           <p className='text-danger mt-4 fs-3 fw-bold'>{productDetail.price}$</p>
-          <button className='modify me-2'>+</button>1 <button className='modify ms-2'>-</button>
+          <button className='modify me-2' onClick={()=>{
+            setQuantity(quantity+1)
+          }}>+</button>{quantity} <button className='modify ms-2' onClick={()=>{
+            if (quantity>1){
+              setQuantity(quantity-1)
+            }
+          }}>-</button>
           <br />
-          <button className='addToCart mt-3'>Add to cart</button>
+          <button className='addToCart mt-3' onClick={()=>{
+            addToCart()
+          }}>Add to cart</button>
         </div>
       </div>
       <div className="detail-bottom ">

@@ -99,11 +99,11 @@ export default function Login() {
           <button>Login</button>
         </div>
         <button className="accessFacebook">
-        <i class="fa fa-facebook"></i>
+        <i class="fa-brands fa-facebook"></i>
         {/* <span> Continue with Facebook </span> */}
         <FacebookLogin 
         appId="762219268192850"
-        autoLoad={true}
+        autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
       />
