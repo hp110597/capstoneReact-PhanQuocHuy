@@ -25,7 +25,7 @@ export default function Home() {
       return  <div className="col-4 my-5 px-5" key={index}>
       <div className="card">
         <div className="card-top">
-        <img src={item.image}  alt={item.name} />
+        <img src={item.image}  alt={item.name} className="w-100"/>
         <p style={{fontSize:24,fontWeight:'300'}}>{item.name}</p>
         <p  style={{fontSize:20,fontWeight:'300',height:100}}>{item.shortDescription}</p>
         </div>

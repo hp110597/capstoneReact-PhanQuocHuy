@@ -15,6 +15,7 @@ import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import Profile from './pages/Profile/Profile';
 import Carts from './pages/Carts/Carts';
+import Search from './pages/Search/Search';
 
 
 //Cấu hình history (chuyển hướng ko cần hook navigate)
@@ -38,6 +39,7 @@ root.render(
         <Route path='login' element={<Login/>}></Route>
         <Route path='profile' element={<Profile/>}></Route>
         <Route path='carts' element={<Carts/>}></Route>
+        <Route path='search' element={<Search/>}></Route>
       </Route>
     </Routes>   
   </HistoryRouter>
