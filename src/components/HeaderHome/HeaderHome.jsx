@@ -25,7 +25,7 @@ export default function HeaderHome(props) {
     const accessToken = getStore(ACCESS_TOKEN)
     if(!accessToken && productOrder.length==0){
       console.log(1);
-      alert("Token không hợp lệ, vui lòng đăng nhập lại");
+      alert("Vui lòng đăng nhập trước khi truy cập giỏ hàng");
     history.push("/login");  
     }
     else if(productOrder.length==0){
