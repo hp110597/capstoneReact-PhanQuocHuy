@@ -69,7 +69,8 @@ export default function HeaderHome(props) {
           style={{ backgroundColor: "#000" }}
         >
           <div className="logo ms-3">
-            <img src="./img/image 3.png" alt="logo" />
+            
+            <NavLink to="/"><img src="./img/image 3.png" alt="logo" /> </NavLink>
           </div>
           <div className="menu me-5">
             <i className="fa fa-search text-light fs-4"></i>
