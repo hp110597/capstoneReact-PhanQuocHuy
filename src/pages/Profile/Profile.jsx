@@ -14,6 +14,8 @@ export default function Profile() {
     dispatch(getProfileApi());
   }, []);
 
+  console.log(userLogin);
+
   const frm = useFormik({
     initialValues: {
     ...userLogin,
