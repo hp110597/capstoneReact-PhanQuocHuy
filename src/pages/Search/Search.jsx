@@ -14,6 +14,7 @@ export default function Search() {
       try {
         //Lấy keyword từ url: url?keyword=abc
         let keyword = searchParams.get("keyword");
+        console.log(keyword);
         if (keyword.trim() !== "" && keyword !== null) {
           let result = await axios({
             url: "https://shop.cyberlearn.vn/api/Product?keyword=" + keyword,
@@ -29,6 +30,7 @@ export default function Search() {
         console.log(err);
       }
     };
+    console.log(keywordRef);
   
     useEffect(() => {
       //call api

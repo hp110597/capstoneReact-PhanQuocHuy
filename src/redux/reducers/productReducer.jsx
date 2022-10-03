@@ -5,6 +5,7 @@ const initialState = {
   arrProduct: [],
   productDetail: [],
   productOrder: [],
+
 };
 
 const productReducer = createSlice({

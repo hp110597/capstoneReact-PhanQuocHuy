@@ -12,22 +12,30 @@ export default function Carts() {
   const { productOrder } = useSelector((state) => state.productReducer);
   const { userLogin } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
-  const emailUser = userLogin?.email;
- 
+  const email = userLogin?.email;
+  console.log(productOrder);
+  // productOrder.productId=productOrder.id
+  // delete productOrder.id
+  const configProductOrder = {...productOrder,productId:productOrder.id}
+  console.log(configProductOrder);
 
- 
+  const objProductToSubmit = {
+    orderDetail:[]
+  };
+  objProductToSubmit.orderDetail.push(configProductOrder)
 
+  console.log({...objProductToSubmit,email});
 
-  const submitOrderApi= async () => {
+  const submitOrderApi = async () => {
     try {
       const result = await axios({
         url: "https://shop.cyberlearn.vn/api/Users/order",
         method: "POST",
-        data: { ...productOrder, emailUser },
+        data: { ...objProductToSubmit, email },
       });
       console.log(result);
       alert(result.data.content);
-      dispatch(getProfileApi())
+      dispatch(getProfileApi());
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +99,6 @@ export default function Carts() {
               </tr>
             </tbody>
           </table>
-       
         </div>
       );
     });
@@ -102,14 +109,14 @@ export default function Carts() {
         <h1 className="text-start">Carts</h1>
         {renderOrderItem()}
         <div className="submit-order">
-            <button
-              onClick={() => {
-                submitOrderApi();
-              }}
-            >
-              SUBMIT ORDER
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              submitOrderApi();
+            }}
+          >
+            SUBMIT ORDER
+          </button>
+        </div>
       </div>
     </div>
   );
